@@ -1,0 +1,43 @@
+CMD_BEEPERV1In.txt
+V1 = First version
+n =  instance
+10/25/2020
+
+DLC 6
+PAYLAYOUT: U8_U8_U8_S8_U16
+
+Function that sends: BEEPERV1
+
+
+payload[0]  U8
+  bit 7:6 Priority: Supercede/append
+     00 = Append this to request buffer
+     01 = Place at top of request buffer
+     10 = Clear buffer, Complete any current request
+     11 = Clear buffer (Stop output immediately)
+
+  bit 5:0 Repetition count
+     00000 = no beep
+     00001 = one beep
+    ...
+     11110 = 30 repetitions
+     11111 = Continuous
+   
+payload[1] U8
+  ON duration (10 ms)
+  0 = No On (use to extend OFF)
+
+payload[2] U8
+   OFF duration(10 ms)
+      Off follows On.
+      0 = zero Off duration
+      Completion of Off ends one Beep
+
+payload[4] S8
+   Chirp rate (10 Hz/sec)
+     0 = no chirp
+
+payload[5-6] U16
+    Base_Freq (Hz)
+
+
