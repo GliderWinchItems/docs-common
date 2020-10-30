@@ -6,6 +6,9 @@ payload layout
 Function that sends: 
    stepper:update100K (repo:branch)
 
+DLC 5
+PAYLOAD_TYPE: U8_FF
+
 payload[0] 
   payload type: U8
   #define DRBIT 0x01 // (1) Bit mask Direction output pin: 0 = low; 1 = high

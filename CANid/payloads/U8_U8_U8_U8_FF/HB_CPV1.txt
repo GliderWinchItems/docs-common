@@ -4,7 +4,7 @@ payload layout
 10/28/2020
 
 DLC 8
-PAYLAYOUT: U8_U8_U8_U8_FF
+PAYLOAD_TYPE: U8_U8_U8_U8_FF
 
 Function that sends: CPSWSV1
 

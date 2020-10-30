@@ -1,0 +1,36 @@
+CANID_MC_SYSTEM_STATE.txt
+
+payload layout
+10/30/2020
+
+Function that sends: 
+   (repo:branch)
+   stepper:levelwind 
+
+DLC 1
+PAYLOAD_TYPE: U8
+
+payload[0] 
+  bit7:4 Major state number
+  bit3:0 Minor state number
+    - zero = final state achieved
+    - non-zero = sub-state in progress
+
+
+
+
+MasterControllerState.h
+// Master Controller state machine  definitions 
+// Lower nibble reserved for sub-states
+#define MC_SAFE      (0 << 4)
+#define MC_PREP      (1 << 4)
+#define MC_ARMED     (2 << 4)
+#define MC_GRNDRTN   (3 << 4)
+#define MC_RAMP      (4 << 4)
+#define MC_CLIMB     (5 << 4)
+#define MC_RECOVERY  (6 << 4)
+#define MC_RETRIEVE  (7 << 4)
+#define MC_ABORT     (8 << 4)
+#define MC_STOP      (9 << 4)
+
+

@@ -1,6 +1,6 @@
 CMD_BEEPERV1In.txt
 V1 = First version
-n =  instance
+In =  instance
 10/25/2020
 
 DLC 6
@@ -13,7 +13,7 @@ payload[0]  U8
   bit 7:6 Priority: Supercede/append
      00 = Append this to request buffer
      01 = Place at top of request buffer
-     10 = Clear buffer, Complete any current request
+     10 = Clear buffer, Complete any in-progress request
      11 = Clear buffer (Stop output immediately)
 
   bit 5:0 Repetition count
