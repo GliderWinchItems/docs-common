@@ -1,4 +1,4 @@
-HB_CPV1.txt
+HB_CPSWSV1.txt
 
 payload layout
 10/28/2020
