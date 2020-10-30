@@ -1,0 +1,3 @@
+# docs-common
+
+This repo is intended to cover documentation that has application across the other repos (and might include repos in GliderWinchCommons). Do not expect the files to be a complete coverage. The incentive for adding this arose from the need for detailed descriptions of CAN message payload fields. The byte layout of the payloads is covered in the .sql file in GliderWinchCommons/embed/svn_common/trunk/db/PAYLOAD_TYPES_INSERT.sql, but in many cases single bytes have bit fields that need description. This repo attempts to capture these descriptions, though the coverage is mostly for "going forward," i.e. new CAN messages, and not covering less used, or obsolete, messages.
