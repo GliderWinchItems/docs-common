@@ -1,0 +1,59 @@
+tunnel-setup.txt
+03/23/24
+
+Problem--
+Computer A wants to ssh into computer B and get a terminal window, BUT
+compute A and computer B can only originate connections outward.
+
+Solution--
+Computer C is able to open a port to accept incoming connections.
+Computer B sshs to C and sets up reverse portforwarding on C.
+Computer A sshs to C and sshs to a the local portforward port.
+
+Good picture to help understand--
+https://unix.stackexchange.com/questions/132326/initiate-ssh-connection-from-server-to-client
+
+Test the setup--
+
+1. netbook pretends to be computer B
+- ssh listening port: 41576
+- on Verizon router (192.168.1.1) which is not local to A or B 
+  avoid the case where direct ssh over local network could be done
+- On B execute the following:
+ssh -R 22222:localhost:41576 47.204.211.51 -p 41571
+
+Note: 
+41576 is the ssh listening port of B (likely 22 on a machine with defaults)
+
+To verify listening port: 
+cat /etc/ssh/sshd_config
+and look for "Port", e.g. the following lines--
+# What ports, IPs and protocols we listen for
+Port 41576
+
+Note:
+22222 is an arbitrary port number chosen not to confilct with other services
+Incoming ports to 22222 are forwarded, in this case to 41576.
+22222 will be the port A uses via C to reach B (see step 2.)
+
+2. ASUS laptop pretends to be computer A
+- Ubuntu 22.04, ssh listen 22
+- on TPLink router 192.168.0.1 and not local to B or C 
+- 'A' executes the following two steps:
+  [login to computer C]
+    ssh deh@47.204.211.51 -p 41571
+  [login to computer B}
+    ssh deh@localhost -p 22222
+
+
+Notes & Problems:
+1. For A the exit is two steps, i.e. first exit B, then C.
+
+2. B needs ssh keys from A.
+
+3. C needs /etc/ssh/sshg_config to allow forwarding--
+GatewayPorts yes
+
+4. Keepalive? (needs some study)
+- cellphone hotspot timeout
+- ServerAliveInterval 
