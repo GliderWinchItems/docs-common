@@ -1,0 +1,97 @@
+tunnel-tie-n-CANs-together.txt
+04/05/2024
+
+General objective--
+
+"N" computers have a CAN gateway giving serial USB input, and
+it the objective is connect the CAN streams via ssh.
+
+All but one of the computers are behind NAT & firewalls. The
+exception has an open port that the others can ssh in to. 
+
+Any, or all, computers can have a gateway/serial port connected.
+
+Basic procedure--
+
+Call the open port computer, compute "C". Typically, computers
+"A" and "B" would want to connect their CAN buses, however, any
+(reasonable) number can connect.
+
+1. Setup of C: Start hub-server
+- A, B, or other, sshs into C:
+  ssh deh@47.204.211.51 -p 41571
+Which gives RPi41-deh prompt
+
+- hub-server is setup
+  If gateway/serial port connected:
+    hub-socat_b 32123 /dev/ttyUSB0 2000000
+  [assumes ttyUSB0 is the correct serial port]
+
+  If gateway has no gateway/serial port:
+    hub-server localhost 32123 &
+
+  This leaves a hub-server running on C with listening port
+  32123.
+
+  exit
+
+2. Each computer that will connect with serial port starts local hub-server
+   hub-socat_b 32123 /dev/ttyUSB0 2000000
+
+   Status: All computers have a local hub-server started, and some
+   have the gateway/serial port connected. 
+
+   If the listening port is 32123 helps avoid confusion.
+
+   Each can check if the gateway is running with--
+     nc localhost 32123
+
+3. Connect first computer A, B, or other, to C.
+
+- Open terminal for Port forwarding, e.g.
+   ssh -L 22228:localhost:32123 47.204.211.51 -p 41571
+Which should end with a RPi41-deh prompt
+
+Leave this terminal open
+
+- Start a local connection, e.g.
+    hub-server localhost 32128 localhost localhost 22228 localhost 32123 &
+ Listen  on 32128: (e.g. nc localhost 32128 to show stream)
+ Connect to 32123: (gateway/serial) if that was set up.
+ Connect to 22228: port being forewared to C.
+
+ 4. Additional connections to C (for some reason?) need their hub-server on C	
+
+- Open a "tandem" hub-server on C that this computer will connect with
+  ssh into C, e.g.
+	 ssh deh@47.204.211.51 -p 41571
+Which gives RPi41-deh prompt
+  Setup hub-server for this computer, e.g.
+     hub-server localhost 32126 localhost 32123 &
+  This connects this hub-server instance to the hub-server that "hubs" everybody.
+
+  At this point is the same procedure as above, but with a few different port
+  numbers.
+
+- Open terminal for Port forwarding, e.g.
+   ssh -L 22221:localhost:32126 47.204.211.51 -p 41571
+Which should end with a RPi41-deh prompt
+Note: 32126 matches the hub-server on RPi41-deh set up for this connection.
+Note: 22221 is a unique number in C.
+
+Leave this terminal open 
+
+- Open a terminal and start a local connection, e.g.
+    hub-server localhost 32126 localhost localhost 22221 localhost 32123 &
+ Listen  on 32128: (e.g. nc localhost 32128 to show stream)
+ Connect to 32123: (gateway/serial) if that was set up.
+ Connect to 22221: port being forewared to C.
+
+At this point 'nc localhost <port>' on A, B, or C will show the combined CAN
+msgs.
+
+
+
+
+
+

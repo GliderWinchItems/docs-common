@@ -1,0 +1,65 @@
+tunnel-tie-two-CAN-bus.txt
+04/04/2024
+
+Purpose: Connect two CAN buses via ssh. One CAN
+bus connects to RPi41-deh in the usual manner.
+
+Which is: hub-server w socat is started:
+  hub-server-socat_b 32123 /dev/ttyUSB0 2000000
+Where: "standard" port 32123
+Only one serial device on the RPi
+Serial speed: 2000000
+
+RPi41-deh can be accessed from the outside:
+deh IP (04/04/2024) is 47.204.211.51
+Forward ports:
+41571 RPi41-deh (RPi 4)
+41572 RPi31-deh (Rpi 3)
+41573 netbk2 (ACER netbook)
+41574 netbk (ACER netbook)
+41575 RPi11-deh (RPi zero W)
+
+
+netbook and RPi41-deh has ssh keys that allow reverse
+ssh'ing, to give a terminal window on the netbook.
+Those keys are probably needed for the following.
+
+1. Start hub-server/socat on RPi41-deh
+-ssh into RPi41-deh
+  ssh deh@47.204.211.51 -p 41571
+  hub-server localhost 32126 localhost 32123 &
+Where: 
+32123 has the hub-server with the serial port
+32126 will be forwarded  
+
+In case there are problems shutting down this hub-server
+will not stop the serial port on the 32123 server.
+
+
+2. On netbook (the remote computer)
+- Start the tunnel
+   ssh -L 22226:localhost:32126 47.204.211.51 -p 41571
+That ends up with a prompt logged in to the RP41
+Leave that terminal window open.
+
+- In another netbook terminal start a local hub-server
+hub-server localhost 22226 &
+
+- Test that the hub-server sees the data stream from 
+RPi41-deh
+  nc localhost 22226 [data stream appears]
+
+  3. Adding another computer (ASUS)
+  - Start tunnel
+    deh@ASUS:~$ ssh -L 22229:localhost:32126 deh@$FITIP -p 41571
+
+  - Open terminal and start local hub-server
+    deh@ASUS:~$ hub-server localhost 22227 localhost 22229
+    Either leave terminal open, or append & to above command
+
+  - Open termianl and check that it works
+    nc localhost 22227
+
+   Note: hub-server port 32126 in the above, on the RPi, connects
+   all that set up the '-L' port forward.
+   

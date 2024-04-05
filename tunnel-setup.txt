@@ -57,3 +57,13 @@ GatewayPorts yes
 4. Keepalive? (needs some study)
 - cellphone hotspot timeout
 - ServerAliveInterval 
+
+5. Copying keys
+If .ssh directory not present--
+cat ~/.ssh/id_rsa.pub | ssh <user>@<hostname> 'umask 0077; mkdir -p .ssh; cat >> .ssh/authorized_keys && echo "Key copied"'
+
+ssh-copy-id "user@hostname.example.com -p <port-number>"
+Copies the public key of your default identity (add -i identity_file for other identities) to the remote host.
+
+https://linuxize.com/post/how-to-set-up-ssh-keys-on-ubuntu-1804/
+
