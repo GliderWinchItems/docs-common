@@ -15,39 +15,48 @@ https://unix.stackexchange.com/questions/132326/initiate-ssh-connection-from-ser
 
 Test the setup--
 
-1. netbook pretends to be computer B
+1. Set reverse port forwarding on computer C
+
+For this example: 
+C is Rpi listening on 47.204.211.51 port 41571
+  where 47.204.211.51 is the internet IP
+    and 41571 is C's listening port which is,
+    set in /etc/ssh/sshd_config
+
+B is netbook that can only originate outwards.
 - ssh listening port: 41576
-- on Verizon router (192.168.1.1) which is not local to A or B 
-  avoid the case where direct ssh over local network could be done
-- On B execute the following:
-ssh -R 22222:localhost:41576 47.204.211.51 -p 41571
+
+B starts the reverse port on C with the following--
+ssh -R 22222:localhost:41576 47.204.211.51 -p 41571 &
 
 Note: 
-41576 is the ssh listening port of B (likely 22 on a machine with defaults)
-
+41576 is the ssh listening port of B  but,
+  likely 22 on a machine with sshd_config with defaults.
 To verify listening port: 
 cat /etc/ssh/sshd_config
 and look for "Port", e.g. the following lines--
-# What ports, IPs and protocols we listen for
-Port 41576
+  # What ports, IPs and protocols we listen for
+  Port 41576
 
 Note:
 22222 is an arbitrary port number chosen not to confilct with other services
-Incoming ports to 22222 are forwarded, in this case to 41576.
-22222 will be the port A uses via C to reach B (see step 2.)
+Incoming traffic on C to port 22222 is forwarded, in this case to the
+B, the netbook, on port 41576.
+
+Other machines wanting to get a terminal window on B will first
+ssh to C, then ssh to B using C's local port 22222 (step 2. below).
 
 2. ASUS laptop pretends to be computer A
 - Ubuntu 22.04, ssh listen 22
-- on TPLink router 192.168.0.1 and not local to B or C 
-- 'A' executes the following two steps:
   [login to computer C]
     ssh deh@47.204.211.51 -p 41571
   [login to computer B}
     ssh deh@localhost -p 22222
 
 
+
 Notes & Problems:
-1. For A the exit is two steps, i.e. first exit B, then C.
+1. For A the exit is two steps, i.e. first exit B, then exit C.
 
 2. B needs ssh keys from A.
 
@@ -55,8 +64,10 @@ Notes & Problems:
 GatewayPorts yes
 
 4. Keepalive? (needs some study)
-- cellphone hotspot timeout
-- ServerAliveInterval 
+Append the following line (before the '&') that sets up reverse port forwarding
+ssh -R 22222:localhost:41576 47.204.211.51 -p 41571
+With options--
+ " -o ServerAliveInterval=60 -o ServerAliveCountMax=3"
 
 5. Copying keys
 If .ssh directory not present--
@@ -66,4 +77,12 @@ ssh-copy-id "user@hostname.example.com -p <port-number>"
 Copies the public key of your default identity (add -i identity_file for other identities) to the remote host.
 
 https://linuxize.com/post/how-to-set-up-ssh-keys-on-ubuntu-1804/
+
+6. Port number reuse
+
+In the example port 22222 was arbitrary. If the port forwarding is stopped and 
+the port forwarding set up is attempted that 22222 may not be available for a
+period of time, e.g. 1-2 hours. Solution: Select a different number.
+
+
 
