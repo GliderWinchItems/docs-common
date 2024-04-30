@@ -1,0 +1,40 @@
+Rpi-wifi.txt
+04/30/2024
+
+Setting up wi-fi on RPi w/o keyboard, mouse, monitor
+
+1. Scan for networks--
+
+sudo iwlist wlan0 scan
+E.g. the following clip--
+Cell 03 - Address: 8E:4E:9D:00:01:74
+                    Channel:10
+                    Frequency:2.457 GHz (Channel 10)
+                    Quality=70/70  Signal level=-31 dBm  
+                    Encryption key:on
+                    ESSID:"Donald's Galaxy S21 5G"
+                    Bit Rates:1 Mb/s; 2 Mb/s; 5.5 Mb/s; 11 Mb/s; 18 Mb/s
+                              24 Mb/s; 36 Mb/s; 54 Mb/s
+                    Bit Rates:6 Mb/s; 9 Mb/s; 12 Mb/s; 48 Mb/s
+                    Mode:Master
+
+2. Update- Add "network"
+
+cd /etc/wpa_supplicant
+sudo nano wpa_supplicant.conf
+
+E.g. add
+etwork={
+	ssid="Donald's Galaxy S21 5G"
+	psk="xgxn6392"
+	key_mgmt=WPA-PSK
+}
+
+
+3. With two networks designated, if one is on and the other off the RPi4 will select the network, e.g.
+
+- On laptop select network, e.g. dd-wrt-16, or Donald's...S23"
+- To connect to RPi4. In laptop terminal window-
+- ssh deh@rp41-deh.local -p 41571
+
+
