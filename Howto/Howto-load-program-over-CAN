@@ -1,0 +1,103 @@
+Howto-load-program-over-CAN
+07/06/2024
+
+Program updates can be loaded over CAN, rather than connecting
+to the SWD on the pcb.
+
+The unit must have a program loader program installed and the
+app program must have its .ld file set to load above the
+loader program.
+
+After reset the loader program executes and waits for about 5
+seconds. The red led on the board flashes. If during this time a msg
+to load a program is received (and for this unit of course)
+it begins the interactive loading process with the source of these
+msgs, i.e. the PC. At the end of the loading it resets/reboots.
+
+If no loader msg is received during the bootup wait the loader
+checks the app crc and checksum, and if these match it jumps to
+the app program.
+
+It may not work.
+
+1. To start
+
+cd ~/GliderWinchItems/BMS/adbms1818
+
+Start the script, e.g. CAN ID, network, port--
+./cc B0E00000 192.168.2.100 32125
+
+2. To monitor progress open a cangateBMS,
+command 'u' or 'n' to display counts of CAN id msgs
+
+When the download is in progress the msg count for
+the CAN id being downloaded will be large, e.g. 1500.
+
+3. In the 1st cangate terminal the end of the load
+should show FEEDBACC when it is successful.
+
+If it shows repeated timeout msgs,
+ctl C.
+up-arrow, and retry.
+
+4. If "unexpected" msgs show, someone is polling this
+unit. Stop any cangates that are polling.
+
+5. If multiple failures, do a full reset
+- Pushbutton on pcb of unit
+- Power cycle CAN power
+- Master reset line to ground
+
+Some L431s will fail a block erase under openocd, and this
+might be occurring with the loading over CAN. Many retries 
+sometimes works, but occassionally the unit needs to be powered
+down. If cycling the 12v doesn't work it may require removing
+the battery ribbon AND 12v, and waiting long enough to assure
+that the SRAM registers have reset.
+
+6. Loading ALL units
+
+If the BMS 1818 program is modified all units would need to be
+reloaded. (For calibration changes most likely only a single
+unit needs an update.)
+
+To load all programs
+Step 1: Generate a list of CAN IDs
+cd ~/GliderWinchItems/BMS/adbms1818
+
+If any changes in the BMS units on the bus run the 
+list generation program, e.g.--
+
+./call_list 192.168.2.100 32125
+
+This program will monitor the CAN bus specified in the arguments
+for about 4 seconds and select CAN IDs in the range assigned
+for BMS units. (A small file, call_file is stored in params directory)
+
+The script prints the list, and hangs (waiting for 'nc' to be closed)
+ctl C to kill 'nc'.
+
+To load all run--
+
+./ccall_run 192.168.2.100 32125
+
+This will run ./cc for each of the CAN ids in the call_list file.
+
+Monitor the progress to catch any that fail.
+
+7. Other items
+
+- compile fails not noticed
+
+When .cc is run there is a compile of the BMS program along with the
+parameter file. If there is a compile error the script keeps going. The
+screen scrolls too fast to see the error. 
+
+The result might be that the program runs and behaves "funny", e.g. 
+everything looked OK but no CAN msgs. Or the changes thought to be
+made have no effect.
+
+
+
+
+

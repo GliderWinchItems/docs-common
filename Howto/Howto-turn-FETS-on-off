@@ -1,0 +1,57 @@
+Howto-turn-FETS-on-off
+07/06/2024
+
+Turn power FETS--DUMP, DUMP2, HEATER--on/off
+
+1. cangateBMS terminal
+
+e.g. computer wifi on local network 192.168.2.xxx
+This opens to Raspberry Pi4 with CAN hat
+cangateBMS 192.168.2.100 32124
+
+2. cangateBMS menu
+
+Check BMS CAN id and Polling CAN id
+'e'
+E.g. (07/06/2024 defaults )
+BMS  B0A00000 (default BMS unit)
+Poll AEC00000 (default PC polls battery string 1)
+
+Set CAN id for => single <= unit of interest
+'ew B0E00000'
+Or, select => ALL <= units (CAN id = 0)
+'ew 00000000'
+
+Check duration between poll msgs
+'e'
+
+Set poll duration (zero = no poll), e.g. every second
+'ed 1000'
+
+Set command to send to unit of interest 
+(m = send to unit of interest only, k = set (not read))
+'emk' 
+Or, for ALL (a = all)
+'eak'
+
+Menu displays, select specific action
+enter '13' for--
+13 SET_DUMP	    // Turn on Dump FET for no more than payload [3]’ secs
+14 SET_DUMP2     // Set DUMP2 FET FET: on|off
+15 SET_HEATER    // Enable Heater mode to payload [3] temperature
+Enter FET, e.g. '13'
+Menu displays, to select ON|OFF
+0 = OFF, 1 = ON
+
+FET remains ON until either==
+a) 3 seconds after last poll msg
+   'x' will stop polling
+   ctl C kill program and stops polling
+
+b) New command sent to turn FET off
+
+c) Any cell voltage drops below the minimum level parameter
+
+
+
+

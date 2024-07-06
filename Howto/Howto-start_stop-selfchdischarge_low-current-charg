@@ -1,0 +1,59 @@
+Howto-start_stop-selfchdischarge_low-current-charge
+07/06/2024
+
+Turn BMS mode ON/OFF of self-discharge (relaxation)|charge
+(balancing). 
+
+Normally, the mode is automatic, but one may want to terminate
+a self-discharge and charge/balance. 
+
+Or, if charging/balancing mode is in progress, terminate and
+go into self-discharge mode. This might occur when the CAN 
+power is off and battery ribbon have been pulled/reinserted
+(which would drop the SRAM saving the status), with the
+result that the program would start in thecharge/balancing
+mode.
+
+1. cangateBMS terminal
+
+e.g. computer wifi on local network 192.168.2.xxx
+This opens to Raspberry Pi4 with CAN hat
+cangateBMS 192.168.2.100 32124
+
+2. cangateBMS menu
+
+Check BMS CAN id and Polling CAN id
+'e'
+E.g. (07/06/2024 defaults )
+BMS  B0A00000 (default BMS unit)
+Poll AEC00000 (default PC polls battery string 1)
+
+Set CAN id for single unit of interest
+'ew B0E00000'
+Or, select ALL units (CAN id = 0)
+'ew 00000000'
+
+Check duration between poll msgs
+'e'
+
+Set poll duration (zero = no poll), e.g. every second
+'ed 1000'
+
+Set command to send to unit of interest 
+(m = send to unit of interest only, k = set (not read))
+'emk' 
+Or, (a = all)
+'eak'
+
+Menu displays, select specific action
+enter '31' for "31 SET_SELFDCHG"
+Menu displays to select ON|OFF
+enter '0' To stop self-discharge, begin charge
+enter '1' To stop charge, begin self-discharge
+
+Red led on unit should come on unless alreay charged.
+
+Stop polling
+'x'
+
+Or, ctl C to kill cangateBMS
