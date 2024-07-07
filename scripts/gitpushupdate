@@ -1,35 +1,22 @@
-#!/bin/bash -e
+#!/bin/bash 
 # gitpushupdate
 # Essentials, (for now)
 # 07/07/2024
 #
-cd ~/GliderWinchCommons/embed
-git commit -m 'update and push' -a
-git push
 
-cd ~/GliderWinchItems/BMS
-git commit -m 'update and push' -a
-git push
+./gitpushheader ~/GliderWinchCommons/embed
 
-cd ~/GliderWinchItems/can-server
-git commit -m 'update and push' -a
-git push
+./gitpushheader ~/GliderWinchItems/BMS
 
-cd ~/GliderWinchItems/CAN loader1
-git commit -m 'update and push' -a
-git push
+./gitpushheader ~/GliderWinchItems/can-server
 
-cd ~/GliderWinchItems/docs_common
-git commit -m 'update and push' -a
-git push
+./gitpushheader ~/GliderWinchItems/CANloader1
 
-cd ~/GliderWinchItems/drum
-git commit -m 'update and push' -a
-git push
+./gitpushheader ~/GliderWinchItems/docs-common
 
-cd ~/GliderWinchItems/hub-server-bridge
-git commit -m 'update and push' -a
-git push
+./gitpushheader ~/GliderWinchItems/drum
+
+./gitpushheader ~/GliderWinchItems/hub-server-bridge
 
 
 
