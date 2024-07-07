@@ -1,0 +1,12 @@
+#!/bin/bash -e
+# compileupdate_embed
+# Lastest compile
+# Essentials, (for now)
+# 07/07/2024
+#
+cd ~/GliderWinchCommons/embed/svn_discoveryf4/PC/sensor/cangateBMS/trunk
+./mm
+
+cd ~/GliderWinchCommons/embed/svn_discoveryf4/PC/sensor/CANldr/trunk
+./mm
+

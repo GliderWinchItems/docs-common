@@ -97,6 +97,17 @@ The result might be that the program runs and behaves "funny", e.g.
 everything looked OK but no CAN msgs. Or the changes thought to be
 made have no effect.
 
+UPDATE: the '-e' option has been added to the scripts. This option stops
+script if a command results in an error. With this, the .cc script
+stops at the end of a compile if there is a compile error.
+
+This could result in other commands, not intended, to stop. E.g. a 
+rm elf command, not really needed, bombed out the execution if the
+previous compile had an error (which would result in no elf file
+being generated, and hence not being able to be removed.) If this
+happens we may have to look in the script. So far, it works.
+
+
 
 
 

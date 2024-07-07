@@ -94,8 +94,23 @@ for offset, scale, scale^2 e.g.--
    p->bmsaux[BMSAUX_6_CUR_SENSE].coef[2] = 0;
 
 Edit the parameters.
+
+Formula for current:
+current = (reading - zero_current_offset) * scale 
+Where:
+  zero_current_offset = above coef[0]
+  scale = above coef[1]
+  coef[2] not used.
+
 Save
 Load over CAN (see Howto)
+
+=> NOTE: When the program is loaded it is likely the mode
+will go into not-self-discharge and the low current
+charger will come on. This will cause the zero current
+reading to be high until the charger turns off. 
+Therefore, the adjustment of zero current may appear to
+be incorrect after the program is re-loaded.
 
 5. Open cangateBMS to display calibrated readings
 

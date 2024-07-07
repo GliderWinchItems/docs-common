@@ -1,0 +1,30 @@
+#!/bin/bash -e
+# gitpullupdate
+# Essentials, (for now)
+# 07/07/2024
+#
+cd ~/GliderWinchCommons/embed
+git pull
+
+cd ~/GliderWinchItems/BMS
+git pull
+
+cd ~/GliderWinchItems/can-server
+git pull
+
+cd ~/GliderWinchItems/CAN loader1
+git pull
+
+cd ~/GliderWinchItems/docs_common
+git pull
+
+cd ~/GliderWinchItems/drum
+git pull
+
+cd ~/GliderWinchItems/hub-server-bridge
+git pull
+
+
+
+
+

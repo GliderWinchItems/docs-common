@@ -1,0 +1,20 @@
+#!/bin/bash -e
+# compileupdate_GliderWinchItems
+# Lastest compile
+# Essentials, (for now)
+# 07/07/2024
+#
+echo "====================================================="
+echo "=============== can-server =========================="
+cd ~/GliderWinchItems/can-server
+make
+echo "====================================================="
+echo
+
+echo "========== hub-server-bridge sand1 =================="
+cd ~/GliderWinchItems/hub-server-bridge/sandboxes/sand1/trunk
+./m sand1
+echo "====================================================="
+echo
+
+
