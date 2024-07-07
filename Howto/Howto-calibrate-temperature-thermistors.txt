@@ -1,28 +1,29 @@
 Howto-calibrate-temperature-thermistors
 07/06/2024
 
-Provisiton for three thermistors on BMS board
+Provision for three thermistors on BMS board and
+mapped in the following--
 
 Thermcal idx
-|  GPIO
-|  |  Header JPx
-|  |  |  BMSAUX-THERM index
-|  |  |  |  cangateBMS header name
+|  GPIO (adbms1818 GPIO name convention)
+|  |  Header PCB label: JPx 
+|  |  |  BMSAUX-THERM array index
+|  |  |  |  cangateBMS command 'ta' header name
 |  |  |  |  |  
 0  2  3  1  Texit
 1  3  4  2  Tamb
 2  4  5  3  TCell
 
+Names on cangateBMS--
 Tamb  is header closest to battery side edge of PCB
       and inlet air temp
 
 Tcell is in middle header and middle of pack cell
 
-Texit is provision (not installed) for exit air
+Texit is header nearest the center of the PCB and
+  for exit air (initially not installed).
 
-
-
-1. cangateBMS terminal to poll
+1. Open cangateBMS terminal to send poll msgs
 
 e.g. computer wifi on local network 192.168.2.xxx
 This opens to Raspberry Pi4 with CAN hat
@@ -55,7 +56,7 @@ enter '34' for--
 
 This starts polling for AUX register readings
 
-2. open another cangateBMS terminal for display msgs
+2. Open another cangateBMS terminal to display msgs
 
 'a' command displays default CAN id
 
@@ -80,14 +81,14 @@ Display AUX registers
       0  18768  19651  23064  49826  30013  27560      0      0      0  65535   0xFAAA
       0  18766  19651  23064  49826  30013  27560      0      0      0  65535   0xFAAA
 
-3. The column CUR SNS (current sense) shows the ADBMS1818 auxiliary ADC reading, e.g. 27560
+3. The columns 2,3,4 (THERM1,2,3) shows the ADBMS1818 auxiliary ADC reading for the thermistors.
 
-If the current is zero this is the ADC w op-amp offset.
-
-The current will not be zero if--
-  a) On-board low current charger is running.
-  b) External charging or loads on the battery string.
-  c) DUMP, DUMP2, HEATER fets are ON and adding a load.
+Formula for temperature:
+temperature = (reading - zero_current_offset) * scale 
+Where:
+  zero_current_offset = above coef[0]
+  scale = above coef[1]
+  coef[2] not used.
 
 4. Update the parameter file for this unit
 
@@ -102,3 +103,6 @@ for offset, scale, scale^2 e.g.--
    p->bmsaux[BMSAUX_6_CUR_SENSE].coef[0] = 30803.0f;
    p->bmsaux[BMSAUX_6_CUR_SENSE].coef[1] = 9.90747E-2f;
    p->bmsaux[BMSAUX_6_CUR_SENSE].coef[2] = 0;
+
+5. Compile and load the program (see Howto-load-program-over_CAN)
+
