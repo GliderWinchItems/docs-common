@@ -12,10 +12,10 @@ git pull
 cd ~/GliderWinchItems/can-server
 git pull
 
-cd ~/GliderWinchItems/CAN loader1
+cd ~/GliderWinchItems/CANloader1
 git pull
 
-cd ~/GliderWinchItems/docs_common
+cd ~/GliderWinchItems/docs-common
 git pull
 
 cd ~/GliderWinchItems/drum
