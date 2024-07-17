@@ -4,19 +4,19 @@
 # 07/07/2024
 #
 
-gitpullsub1 ~/GliderWinchCommons/embed
+./gitpullsub1 ~/GliderWinchCommons/embed
 
-gitpullsub1 ~/GliderWinchItems/BMS
+./gitpullsub1 ~/GliderWinchItems/BMS
 
-gitpullsub1 ~/GliderWinchItems/can-server
+./gitpullsub1 ~/GliderWinchItems/can-server
 
-gitpullsub1 ~/GliderWinchItems/CANloader1
+./gitpullsub1 ~/GliderWinchItems/CANloader1
 
-gitpullsub1 ~/GliderWinchItems/docs-common
+./gitpullsub1 ~/GliderWinchItems/docs-common
 
-gitpullsub1 ~/GliderWinchItems/drum
+./gitpullsub1 ~/GliderWinchItems/drum
 
-gitpullsub1 ~/GliderWinchItems/hub-server-bridge
+./gitpullsub1 ~/GliderWinchItems/hub-server-bridge
 
 echo "=============================================="
 echo "END OF LIST"
