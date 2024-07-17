@@ -1,0 +1,32 @@
+Howto-load-CAN-loader
+07/16/2024
+
+The CAN loader occupies the first 0x5000 of flash.
+The "app" loads at 0x5000.
+
+To flash the CAN loader
+
+1. Flash the CAN loader
+
+cd ~/GliderWinchItems/CANloader1
+
+./mm <CAN id>, e.g.
+./mm B0E00000
+
+2. Make a label and attach!
+
+E.g. a small label "B0E0"
+
+3. Trouble-shooting
+
+Under some conditions if the first block is erased the
+reset will jump to the internal L431 loader. 
+
+To get out of this mode the loader program must be 
+flashed, however it won't jump the loader program unless
+power is cycled--
+- remove power and CAN
+- restore power
+
+
+

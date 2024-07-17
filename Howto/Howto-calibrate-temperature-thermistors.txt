@@ -8,19 +8,19 @@ Thermcal idx
 |  GPIO (adbms1818 GPIO name convention)
 |  |  Header PCB label: JPx 
 |  |  |  BMSAUX-THERM array index
-|  |  |  |  cangateBMS command 'ta' header name
+|  |  |  |  cangateBMS command 'ta' column name
 |  |  |  |  |  
-0  2  3  1  Texit
-1  3  4  2  Tamb
+0  2  2  1  Tamb
+1  3  4  2  Texit
 2  4  5  3  TCell
 
-Names on cangateBMS--
-Tamb  is header closest to battery side edge of PCB
+Names on cangateBMS 'ta' command columns--
+- Tamb  is header closest to battery side edge of PCB
       and inlet air temp
 
-Tcell is in middle header and middle of pack cell
+- Tcell is in middle header and middle of pack cell
 
-Texit is header nearest the center of the PCB and
+- Texit is header nearest the center of the PCB and
   for exit air (initially not installed).
 
 1. Open cangateBMS terminal to send poll msgs

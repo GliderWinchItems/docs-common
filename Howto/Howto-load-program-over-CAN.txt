@@ -18,7 +18,7 @@ If no loader msg is received during the bootup wait the loader
 checks the app crc and checksum, and if these match it jumps to
 the app program.
 
-It may not work.
+It may not work!
 
 1. To start
 
@@ -85,9 +85,7 @@ This will run ./cc for each of the CAN ids in the call_list file.
 
 Monitor the progress to catch any that fail.
 
-7. Other items
-
-- compile fails not noticed
+7. Compile fails not noticed (fixed)
 
 When .cc is run there is a compile of the BMS program along with the
 parameter file. If there is a compile error the script keeps going. The
@@ -107,8 +105,18 @@ previous compile had an error (which would result in no elf file
 being generated, and hence not being able to be removed.) If this
 happens we may have to look in the script. So far, it works.
 
+8. Pacing: CANldr
 
+CANldr (in GliderWinchCommons/embed/*f4/PC/sensor/CANldr/trunk)
+has a file: download.c that has a constant that sets the
+delay between msgs. While it "should work" without any added
+delays, it sometimes fails. Increasing the delay time may help.
 
-
-
-
+To set the delay time edit--
+#define USLEEP 420// usec pacing of sending
+One 8 byte payload CAN msg is about 280 usec.
+420 "seems to work most of the time"
+10000 is getting slow
+The number of CAN msgs per sec during the loading
+can be monitored via a terminal with cangate with the 'u'
+or 'n' command.
