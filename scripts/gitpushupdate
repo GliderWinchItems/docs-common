@@ -3,7 +3,7 @@
 # Essentials, (for now)
 # 07/07/2024
 #
-
+git config --local status.showUntrackedFiles no
 ./gitpushheader ~/GliderWinchCommons/embed
 
 ./gitpushheader ~/GliderWinchItems/BMS
@@ -17,6 +17,6 @@
 ./gitpushheader ~/GliderWinchItems/drum
 
 ./gitpushheader ~/GliderWinchItems/hub-server-bridge
-
+git config --local status.showUntrackedFiles yes
 
 
