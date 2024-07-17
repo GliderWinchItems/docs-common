@@ -3,28 +3,21 @@
 # Essentials, (for now)
 # 07/07/2024
 #
-cd ~/GliderWinchCommons/embed
-git pull
 
-cd ~/GliderWinchItems/BMS
-git pull
+gitpullsub1 ~/GliderWinchCommons/embed
 
-cd ~/GliderWinchItems/can-server
-git pull
+gitpullsub1 ~/GliderWinchItems/BMS
 
-cd ~/GliderWinchItems/CANloader1
-git pull
+gitpullsub1 ~/GliderWinchItems/can-server
 
-cd ~/GliderWinchItems/docs-common
-git pull
+gitpullsub1 ~/GliderWinchItems/CANloader1
 
-cd ~/GliderWinchItems/drum
-git pull
+gitpullsub1 ~/GliderWinchItems/docs-common
 
-cd ~/GliderWinchItems/hub-server-bridge
-git pull
+gitpullsub1 ~/GliderWinchItems/drum
 
+gitpullsub1 ~/GliderWinchItems/hub-server-bridge
 
-
-
-
+echo "=============================================="
+echo "END OF LIST"
+echo "=============================================="
