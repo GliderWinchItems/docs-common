@@ -17,6 +17,5 @@
 ./gitpushheader ~/GliderWinchItems/drum
 
 ./gitpushheader ~/GliderWinchItems/hub-server-bridge
-#git config --global status.showUntrackedFiles all
 
 

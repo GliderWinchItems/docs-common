@@ -3,7 +3,18 @@
 # Lastest compile
 # Essentials, (for now)
 # 07/07/2024
+# 08/03/2024 Add crc-srec (in ./cc script sequence)
 #
+echo "====================================================="
+echo "=============== CAN1loader/ldrfixedL431 ============="
+cd ~/GliderWinchItems/CANloader1/ldrfixedL431
+./mm
+echo "=============== CAN1loader/PC/crc-srec =============="
+cd ~/GliderWinchItems/CANloader1/PC/crc-srec
+gcc -Wall crc-srec.c crc-32_nib.c -o crc-srec
+echo "====================================================="
+echo
+
 echo "====================================================="
 echo "=============== can-server =========================="
 cd ~/GliderWinchItems/can-server
