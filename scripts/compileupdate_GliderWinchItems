@@ -7,9 +7,11 @@
 #
 echo "====================================================="
 echo "=============== CAN1loader/ldrfixedL431 ============="
-cd ~/GliderWinchItems/CANloader1/ldrfixedL431
-./mm
+echo " Compile not done here: ldrfixedL431 compiles for each CAN id "
+#cd ~/GliderWinchItems/CANloader1/ldrfixedL431
+#./mm
 echo "=============== CAN1loader/PC/crc-srec =============="
+echo "gcc -Wall crc-srec.c crc-32_nib.c -o crc-srec"
 cd ~/GliderWinchItems/CANloader1/PC/crc-srec
 gcc -Wall crc-srec.c crc-32_nib.c -o crc-srec
 echo "====================================================="
