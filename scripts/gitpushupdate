@@ -4,6 +4,10 @@
 # 07/07/2024
 #
 #git config --global status.showUntrackedFiles no
+
+echo "SKIP THIS JIC"
+exit
+
 ./gitpushheader ~/GliderWinchCommons/embed
 
 ./gitpushheader ~/GliderWinchItems/BMS

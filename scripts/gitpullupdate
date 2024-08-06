@@ -10,6 +10,8 @@
 
 ./gitpullsub1 ~/GliderWinchItems/can-server
 
+./gitpullsub1 ~/GliderWinchItems/bridging
+
 ./gitpullsub1 ~/GliderWinchItems/CANloader1
 
 ./gitpullsub1 ~/GliderWinchItems/docs-common
