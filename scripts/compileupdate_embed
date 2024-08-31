@@ -10,3 +10,5 @@ cd ~/GliderWinchCommons/embed/svn_discoveryf4/PC/sensor/cangateBMS/trunk
 cd ~/GliderWinchCommons/embed/svn_discoveryf4/PC/sensor/CANldr/trunk
 ./mm
 
+cd ~/GliderWinchCommons/embed/svn_discoveryf4/PC/sensor/CANldr1/trunk
+./mm
