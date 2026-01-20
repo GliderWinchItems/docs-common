@@ -1,0 +1,37 @@
+Software TODO items--
+
+1. 01/12/26 
+- CAN msgs for calibrated and uncalibrated tension
+  Add CAN msg for zero'd calibrated tension
+  CP F4 or drum reads POD msg; recalibrates and sends CAN msg;
+    adds zero'ing offset from a cangate command,
+    or, CP pushbutton sequence.
+
+ - Belt tension in GEVCUr or MC startup that holds up
+   applying torque without the belt being tensioned.
+
+- Ztension
+  Cangate command, or CP pushbutton sequence.
+
+- Odometer
+  iFGT - sheave with Drum direction
+
+- Rope speed
+  iFGT sheave with drum direction or,
+  drum encoder calibrated by sheave for
+  high resolution at slow speed.
+
+
+2. 01/13/26
+
+-  (Earlier) BMS modules do not run low current chargers when
+   winch state is in not-SAFE.
+
+   Add to this not to charge when there is no AC power (which
+   would mean the 12v supplies are running on the HV battery).
+
+   Tentative: Have BMS command to not charge for 'x' seconds
+   when a CAN msg from the emcmmc is sent. The emcmmc determines
+   the conditions when charging is off and sends these msgs
+   fast enough to hold the BMS nodes from charging.
+
