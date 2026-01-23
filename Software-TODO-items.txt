@@ -1,5 +1,8 @@
 Software TODO items--
 
+This list is to capture items we talked about that are lower on 
+the todo list and easily forgotten.
+
 1. 01/12/26 
 - CAN msgs for calibrated and uncalibrated tension
   Add CAN msg for zero'd calibrated tension
@@ -35,3 +38,14 @@ Software TODO items--
    the conditions when charging is off and sends these msgs
    fast enough to hold the BMS nodes from charging.
 
+3. 01/23/26
+
+- 004 msg from gps/logger requires changing CAN id B1C00000 in gps/logger
+  as it conflicts withe BMS module on GSM's battery string.
+
+  The gps/logger used this address for NSAT, and other items in
+  the lat/long/height reporting.
+
+  The GliderWinchCommons/embed/svn_common/trunk/db/CANID_INSERT.sql
+  has the gps/logger CAN id set for B1C00004 (29b), but these
+  have not been updated on the loggers.
