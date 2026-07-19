@@ -56,8 +56,8 @@ echo LINE 40 $PWD/$repo
         cd -
     else
     # Repo directory not present, so do a git clone
-echo GIT CLONE $PWD/$repo
-        git clone ssh://git@github.com//GliderWinchItems/$repo
+echo GIT CLONE $PWD/$repo "git clone ssh://git@github.com/GliderWinchItems/$repo"
+        git clone ssh://git@github.com/GliderWinchItems/$repo
         # Capture return status from git clone
         status=$?
         if [ $status -ne 0 ]; then
@@ -71,4 +71,4 @@ echo GIT CLONE $PWD/$repo
 done < "$REPO_FILE"
 
 echo "----------------------------------------"
-echo "Success: All repositories cloned successfully!"
+echo "Success: All GLIDERWINCHITEMS repositories cloned successfully!"

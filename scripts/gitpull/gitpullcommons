@@ -18,7 +18,7 @@ if [ ! -f "$REPO_FILE" ]; then
 fi
 
 cd ../../../..
-echo $PWD
+echo STEP3 $PWD
 if [ -d "GliderWinchCommons" ]; then
     cd GliderWinchCommons
 else
@@ -63,8 +63,8 @@ echo LINE 40 $PWD/$repo
         cd -
     else
     # Repo directory not present, so do a git clone
-echo GIT CLONE $PWD/$repo
-        git clone ssh://git@github.com//GliderWinchCommons/$repo
+echo GIT CLONE $PWD/$repo "git clone ssh://git@github.com/GliderWinchCommons/$repo"
+        git clone ssh://git@github.com/GliderWinchCommons/$repo
         # Capture return status from git clone
         status=$?
         if [ $status -ne 0 ]; then
@@ -78,4 +78,4 @@ echo GIT CLONE $PWD/$repo
 done < "$REPO_FILE"
 
 echo "----------------------------------------"
-echo "Success: All repositories cloned successfully!"
+echo "Success: All GLIDERWINCHCOMMONS repositories cloned successfully!"
