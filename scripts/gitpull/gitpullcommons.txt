@@ -1,0 +1,14 @@
+#gitpullcommons.txt
+# 07/17/2026
+#
+embed
+javamisc
+javaparams
+# Gonzaga_hc
+# bb
+# control_loop
+# cp
+# Eastern_hc
+# logs
+# mc
+# ps

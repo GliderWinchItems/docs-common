@@ -1,0 +1,18 @@
+#gitpullitems.txt
+# List of repos to do a git clone or git pull update
+# 07/17/2026
+#
+BMS
+bmsmot
+CANloader1
+can-server
+contactor
+docs-common
+drum
+GEVCUr
+hub-server-bridge
+javaMeters
+# db
+# GEVCUr2
+# GliderWinchj1
+# GliderWinchj2

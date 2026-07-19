@@ -1,0 +1,30 @@
+#gitpullall.txt
+# List of repos to do a git clone or git pull update
+# 07/17/2026
+#
+GliderWinchItems/BMS
+GliderWinchItems/bmsmot
+GliderWinchItems/GliderWinchItems/CANloader1
+GliderWinchItems/can-server
+GliderWinchItems/contactor
+GliderWinchItems/docs-common
+GliderWinchItems/drum
+GliderWinchItems/GEVCUr
+GliderWinchItems/hub-server-bridge
+GliderWinchItems/javaMeters
+# GliderWinchItems/db
+# GliderWinchItems/GEVCUr2
+# GliderWinchItems/GliderWinchj1
+# GliderWinchItems/GliderWinchj2
+#
+embed
+javamisc
+javaparams
+# GliderWinchCommons/Gonzaga_hc
+# GliderWinchCommons/bb
+# GliderWinchCommons/control_loop
+# GliderWinchCommons/cp
+# GliderWinchCommons/Eastern_hc
+# GliderWinchCommons/logs
+# GliderWinchCommons/mc
+# GliderWinchCommons/ps

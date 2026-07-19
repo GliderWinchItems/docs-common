@@ -1,0 +1,81 @@
+#!/usr/bin/env bash
+# gitpullcommons <repo list>
+
+# Exit immediately if a command exits with a non-zero status
+#set -e
+echo START GIT PULL GLIDERWINCHCOMMONS
+
+echo STEP1 $PWD
+
+# Define the file containing the list of repositories
+REPO_FILE=$PWD/$1
+echo STEP2 $REPO_FILE
+
+# Check if the repository file exists
+if [ ! -f "$REPO_FILE" ]; then
+    echo "Error: File '$REPO_FILE' not found." >&2
+    exit 1
+fi
+
+cd ../../../..
+echo $PWD
+if [ -d "GliderWinchCommons" ]; then
+    cd GliderWinchCommons
+else
+    echo $PWD
+    echo GliderWinchCommons not found
+    exit
+fi
+
+
+echo "Starting repository cloning process..."
+
+# Read the file line by line
+while IFS= read -r repo || [ -n "$repo" ]; do
+    # Trim leading/trailing whitespace
+    repo=$(echo "$repo" | xargs)
+echo LINE 30 $repo
+    
+    # Skip empty lines and lines that start with a comment (#)
+    if [ -z "$repo" ] || [[ "$repo" =~ ^# ]]; then
+        continue
+    fi
+
+    echo "----------------------------------------"
+
+#echo LINE 39 $PWD $1
+echo LINE 40 $PWD/$repo
+
+    REPOK=$PWD/$repo
+    echo REPOK = $REPOK
+
+    if [ -e "$REPOK" ]; then        
+    # Repo directory exists, so try a git pull        
+        cd $repo
+    echo GIT PULL $PWD/$repo
+        git pull
+        # Capture return status from git clone
+        status=$?
+        if [ $status -ne 0 ]; then
+            echo "Git pull failed with exit code $status" >&2
+            exit $status
+        fi    
+        cd -
+    else
+    # Repo directory not present, so do a git clone
+echo GIT CLONE $PWD/$repo
+        git clone ssh://git@github.com//GliderWinchCommons/$repo
+        # Capture return status from git clone
+        status=$?
+        if [ $status -ne 0 ]; then
+            echo "Git clone failed with exit code $status" >&2
+            exit $status
+        fi    
+    fi
+
+    echo "----------------------------------------"
+
+done < "$REPO_FILE"
+
+echo "----------------------------------------"
+echo "Success: All repositories cloned successfully!"

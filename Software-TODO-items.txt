@@ -4,22 +4,26 @@ This list is to capture items we talked about that are lower on
 the todo list and easily forgotten.
 
 1. 01/12/26 
-- CAN msgs for calibrated and uncalibrated tension
+a) CAN msgs for calibrated and uncalibrated tension
   Add CAN msg for zero'd calibrated tension
   CP F4 or drum reads POD msg; recalibrates and sends CAN msg;
     adds zero'ing offset from a cangate command,
     or, CP pushbutton sequence.
 
- - Belt tension in GEVCUr or MC startup that holds up
+b) Belt tension in GEVCUr or MC startup that holds up
    applying torque without the belt being tensioned.
 
-- Ztension
+c) Ztension
   Cangate command, or CP pushbutton sequence.
 
-- Odometer
-  iFGT - sheave with Drum direction
+d) Odometer
+  iFGT - sheave distance with Drum direction
+  Drum diameter estimate.
+  Corner-cases
+    sheave speed too low measurment
+    sheave spinning free.
 
-- Rope speed
+e) Rope speed
   iFGT sheave with drum direction or,
   drum encoder calibrated by sheave for
   high resolution at slow speed.
@@ -27,7 +31,7 @@ the todo list and easily forgotten.
 
 2. 01/13/26
 
--  (Earlier) BMS modules do not run low current chargers when
+f)  (Earlier) BMS modules do not run low current chargers when
    winch state is in not-SAFE.
 
    Add to this not to charge when there is no AC power (which
@@ -40,7 +44,7 @@ the todo list and easily forgotten.
 
 3. 01/23/26
 
-- 004 msg from gps/logger requires changing CAN id B1C00000 in gps/logger
+g) 004 msg from gps/logger requires changing CAN id B1C00000 in gps/logger
   as it conflicts withe BMS module on GSM's battery string.
 
   The gps/logger used this address for NSAT, and other items in
@@ -49,3 +53,33 @@ the todo list and easily forgotten.
   The GliderWinchCommons/embed/svn_common/trunk/db/CANID_INSERT.sql
   has the gps/logger CAN id set for B1C00004 (29b), but these
   have not been updated on the loggers.
+
+h) Rope line-out sensor
+  An embeded magnet in the rope signals a fairlead sensor that
+  (repent: the end is near) or brakes the drum.
+
+  CAN ID needs to be assigned. Provision for the POD for both
+  hw input of the sensor, sw in the code, is needed.
+
+4. 02/15/26
+
+BMS low current chargers disabled when running on HV battery
+i) Implement BMS commmand #17 to disable, with timout in payload
+
+5. 02/15/26
+
+BMS module capacity testing
+j) Discharge resistor calibration parameters (HEATER & DUMP)
+k) coulomb accumulation & CAN msg reporting (i.e. command)
+l) Possible cangate type operation 
+
+Problem: readout of cell voltage turns off the discharging 
+during the reading. This will affect the coulomb counting.
+
+6. 02/16/26
+
+BMS version (parameters, code)
+
+
+  
+

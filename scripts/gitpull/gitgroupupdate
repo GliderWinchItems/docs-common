@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+#gitrepoupdate
+
+cd ..
+if [ -d GliderWinchItems ]; then
+echo GliderWinchItems directory found $PWD
+	cd GliderWinchItems/docs-common/scripts/gitpull
+#	./gitpullitems gitpullitems.txt
+	./gitpullcommons gitpullcommons.txt
+
+	GITPULL=$PWD
+else
+	echo GliderWinchItems directory not found
+	exit
+fi
